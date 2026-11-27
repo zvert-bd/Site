@@ -1,7 +1,7 @@
 // ===== CONTACT FORM SETTINGS =====
 // Paste your free Web3Forms access key between the quotes (get it at web3forms.com with zvert.bd@gmail.com).
 // While it is empty, the form opens the visitor's Gmail with their message filled in instead.
-const WEB3FORMS_KEY='';
+const WEB3FORMS_KEY='1ac75ccd-b744-425f-84af-82d0ec8bce2c';
 // ==================================
 {
 const T=(en,bn)=>`<span class="en">${en}</span><span class="bn">${bn}</span>`;
