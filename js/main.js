@@ -55,31 +55,41 @@ document.addEventListener('zvert:lang',fill);fill();
 document.getElementById('plans').addEventListener('click',e=>{const a=e.target.closest('[data-plan]');if(a)fPlan.selectedIndex=plans.findIndex(p=>p[0]===a.dataset.plan);});
 
 const form=document.getElementById('brief'),out=document.getElementById('out'),msg=document.getElementById('msg'),acts=document.getElementById('acts'),send=document.getElementById('send');
-const EMAIL='zvert.bd@gmail.com';
-const gmailLink=(su,body)=>'https://mail.google.com/mail/?view=cm&fs=1&to='+EMAIL+'&su='+encodeURIComponent(su)+'&body='+encodeURIComponent(body);
+const EMAIL='zvert.bd@gmail.com',enc=encodeURIComponent;
 const say=(cls,en,bn)=>{msg.className='msg '+cls;msg.textContent=root.lang==='bn'?bn:en};
-let text='';
-form.addEventListener('submit',async e=>{e.preventDefault();
- const v=n=>form[n].value.trim(),name=v('name'),shop=v('shop');
- if(!name){say('err','Please add your name.','আপনার নাম লিখুন।');form.name.focus();return}
- if(!shop){say('err','Please add your shop or page name.','দোকান বা পেজের নাম লিখুন।');form.shop.focus();return}
- if(!form.ok.checked){say('err','Please confirm your product is halal.','অনুগ্রহ করে নিশ্চিত করুন পণ্যটি হালাল।');return}
- const subject='Ad enquiry: '+shop;
- text=`Assalamu alaikum Zvert,\n\nName: ${name}\nPhone/WhatsApp: ${v('phone')||'-'}\nEmail: ${v('email')||'-'}\nShop: ${shop}\nProducts: ${fCat.value}\nPackage: ${fPlan.value}\n\n${v('note')}\n\nMy product is halal and my claims are true.`;
- if(WEB3FORMS_KEY){
-  send.disabled=true;say('','Sending…','পাঠানো হচ্ছে…');
-  try{
-   const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
-    body:JSON.stringify({access_key:WEB3FORMS_KEY,subject,from_name:'Zvert website',name,phone:v('phone'),email:v('email')||undefined,replyto:v('email')||undefined,shop,products:fCat.value,package:fPlan.value,message:v('note'),botcheck:form.botcheck.checked})});
-   const d=await r.json().catch(()=>({}));
-   if(r.ok&&d.success!==false){form.reset();fill();out.classList.remove('on');acts.hidden=true;say('ok','Thank you! Your message has reached us. We will reply soon, in sha Allah.','ধন্যবাদ! আপনার বার্তা আমাদের কাছে পৌঁছেছে। ইন শা আল্লাহ শীঘ্রই উত্তর দেব।');send.disabled=false;return}
-   throw new Error(d.message||r.status);
-  }catch(err){send.disabled=false;say('err','Sorry, the message could not be sent. Please use one of the buttons below instead.','দুঃখিত, বার্তাটি পাঠানো যায়নি। নিচের যেকোনো বোতাম ব্যবহার করুন।')}
- }else{say('','Your message is ready. Tap "Open in Gmail" to send it.','আপনার বার্তা তৈরি। পাঠাতে "জিমেইলে খুলুন" চাপুন।')}
+// ===== OPEN GMAIL WITH THE MESSAGE =====
+// Computer: opens Gmail in a new browser tab with the message written.
+// Android: opens the Gmail app's compose screen (mailto: goes to Gmail, the phone's mail app).
+// iPhone/iPad: opens the Gmail app; if it is not installed, the iPhone Mail app instead.
+const UA=navigator.userAgent,isAndroid=/Android/i.test(UA),isIOS=/iPhone|iPad|iPod/i.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+const gmailWeb=(su,b)=>'https://mail.google.com/mail/?view=cm&fs=1&to='+EMAIL+'&su='+enc(su)+'&body='+enc(b);
+const mailto=(su,b)=>'mailto:'+EMAIL+'?subject='+enc(su)+'&body='+enc(b);
+const openGmail=(su,b)=>{
+ if(isAndroid){location.href=mailto(su,b);return}
+ if(isIOS){const t=setTimeout(()=>{if(!document.hidden)location.href=mailto(su,b)},1500);addEventListener('pagehide',()=>clearTimeout(t),{once:true});location.href='googlegmail://co?to='+EMAIL+'&subject='+enc(su)+'&body='+enc(b);return}
+ const w=window.open(gmailWeb(su,b),'_blank');if(w){try{w.opener=null}catch(err){}}else location.href=gmailWeb(su,b);
+};
+const QUICK_SUBJECT='Ad enquiry from the Zvert website',QUICK_BODY='Assalamu alaikum Zvert,\n\n';
+document.getElementById('send-email').addEventListener('click',e=>{e.preventDefault();openGmail(QUICK_SUBJECT,QUICK_BODY)});
+let text='',subject=QUICK_SUBJECT;
+const build=()=>{const v=n=>form[n].value.trim();
+ subject='Ad enquiry'+(v('shop')?': '+v('shop'):' from the Zvert website');
+ text=`Assalamu alaikum Zvert,\n\nName: ${v('name')||'-'}\nPhone/WhatsApp: ${v('phone')||'-'}\nEmail: ${v('email')||'-'}\nShop: ${v('shop')||'-'}\nProducts: ${fCat.value}\nPackage: ${fPlan.value}\n\n${v('note')}`+(form.ok.checked?'\n\nMy product is halal and my claims are true.':'');
  out.textContent=text;out.classList.add('on');acts.hidden=false;
- document.getElementById('gmail').href=gmailLink(subject,text);
- document.getElementById('mail').href='mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(text);
- if(!WEB3FORMS_KEY){try{window.open(gmailLink(subject,text),'_blank','noopener')}catch(err){}}
+ document.getElementById('gmail').href=gmailWeb(subject,text);};
+document.getElementById('gmail').addEventListener('click',e=>{e.preventDefault();build();openGmail(subject,text)});
+form.addEventListener('submit',async e=>{e.preventDefault();build();
+ if(!WEB3FORMS_KEY){openGmail(subject,text);say('ok','Gmail is opening with your message. Just press Send there.','আপনার বার্তাসহ জিমেইল খুলছে। সেখানে Send চাপুন।');return}
+ const v=n=>form[n].value.trim();
+ send.disabled=true;say('','Sending…','পাঠানো হচ্ছে…');
+ try{
+  const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+   body:JSON.stringify({access_key:WEB3FORMS_KEY,subject,from_name:'Zvert website',name:v('name'),phone:v('phone'),email:v('email')||undefined,replyto:v('email')||undefined,shop:v('shop'),products:fCat.value,package:fPlan.value,message:v('note'),halal_confirmed:form.ok.checked,botcheck:form.botcheck.checked})});
+  const d=await r.json().catch(()=>({}));
+  if(r.ok&&d.success!==false){form.reset();fill();out.classList.remove('on');acts.hidden=true;say('ok','Thank you! Your message has reached us. We will reply soon, in sha Allah.','ধন্যবাদ! আপনার বার্তা আমাদের কাছে পৌঁছেছে। ইন শা আল্লাহ শীঘ্রই উত্তর দেব।')}
+  else throw new Error(d.message||r.status);
+ }catch(err){say('err','Sorry, it could not be sent. Tap "Open in Gmail" below instead.','দুঃখিত, পাঠানো যায়নি। নিচের "জিমেইলে খুলুন" চাপুন।')}
+ send.disabled=false;
 });
 const copy=async(t,en,bn)=>{try{await navigator.clipboard.writeText(t);say('ok',en,bn)}catch(err){say('err','Could not copy. Our email is '+EMAIL,'কপি করা যায়নি। আমাদের ইমেইল: '+EMAIL)}};
 document.getElementById('copy').addEventListener('click',()=>copy(text,'Copied. Paste it into an email to '+EMAIL+' or a Facebook message.','কপি হয়েছে। '+EMAIL+' ঠিকানায় ইমেইলে বা ফেসবুক মেসেজে পেস্ট করুন।'));
