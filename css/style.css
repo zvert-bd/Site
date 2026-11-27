@@ -177,3 +177,9 @@ html.js .rv.in{opacity:1;transform:none}
 html.js .rv.in.card,html.js .rv.in.ad,html.js .rv.in.plan,html.js .steps .rv.in{transition:opacity .7s,transform .3s,box-shadow .3s,border-color .3s}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,::after{animation:none!important;transition:none!important}}
+.btn.sm{min-height:44px;padding:0 16px;font-size:14px}
+.mailbox{align-items:flex-start}.mailbox>span{display:grid;gap:4px}
+.mail-btns{margin-top:10px;gap:8px}
+.btn.ghost.dark{color:var(--navy);border-color:rgba(11,31,58,.35)}.btn.ghost.dark:hover{border-color:var(--navy)}
+.msg.ok{color:#1d6b3a;font-weight:700}.msg.err{color:#b3261e}
+button[disabled]{opacity:.6;cursor:wait}
