@@ -41,10 +41,8 @@ const fill=()=>{const b=root.lang==='bn',ci=fCat.selectedIndex,pi=fPlan.selected
  fCat.innerHTML=cats.map(c=>`<option>${b?c[1]:c[0]}</option>`).join('');
  fPlan.innerHTML=[...plans.map(p=>(b?p[1]:p[0])+' · '+(b?p[3]:p[2])),b?'এখনো নিশ্চিত নই':'Not sure yet'].map(o=>`<option>${o}</option>`).join('');
  fCat.selectedIndex=Math.max(ci,0);fPlan.selectedIndex=pi<0?1:pi;};
-const setLang=l=>{root.lang=l;document.querySelectorAll('.lang button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===l));fill();try{localStorage.setItem('zvert-lang',l)}catch(e){}};
-document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>setLang(b.dataset.l)));
-let saved='en';try{saved=localStorage.getItem('zvert-lang')||'en'}catch(e){}
-setLang(saved);
+// The language switch itself lives in index.html (bottom). This only re-translates the form menus when it changes.
+document.addEventListener('zvert:lang',fill);fill();
 document.getElementById('plans').addEventListener('click',e=>{const a=e.target.closest('[data-plan]');if(a)fPlan.selectedIndex=plans.findIndex(p=>p[0]===a.dataset.plan);});
 
 const form=document.getElementById('brief'),out=document.getElementById('out'),msg=document.getElementById('msg'),acts=document.getElementById('acts');
