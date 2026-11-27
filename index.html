@@ -27,7 +27,7 @@
       <a href="#pricing"><span class="en">Pricing</span><span class="bn">প্যাকেজ</span></a>
       <a href="#contact"><span class="en">Contact</span><span class="bn">যোগাযোগ</span></a>
     </nav>
-    <div class="lang" role="group" aria-label="Language">
+    <div class="lang" role="group" aria-label="Language / ভাষা">
       <button type="button" data-l="en" aria-pressed="true">EN</button>
       <button type="button" data-l="bn" aria-pressed="false">বাংলা</button>
     </div>
@@ -190,6 +190,28 @@
   <p>© 2026 Zvert. <span class="en">Halal Ads for Bangladesh.</span><span class="bn">হালাল বিজ্ঞাপন, বাংলাদেশের জন্য।</span></p>
 </div></footer>
 
+<!-- LANGUAGE SWITCH (EN / বাংলা)
+     Tapping either side of the pill switches language; tapping the side that is already on flips to the other one.
+     It is kept here, inside index.html, so it still works even if js/main.js fails to load.
+     How it works: it sets <html lang="en"> or <html lang="bn">. css/style.css then hides every class="bn" text
+     in English mode and every class="en" text in Bangla mode. Any new text needs both versions. -->
+<script>
+(function(){
+  var root=document.documentElement, btns=document.querySelectorAll('.lang button');
+  function setLang(l){
+    root.lang=l;
+    for(var i=0;i<btns.length;i++) btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-l')===l ? 'true' : 'false');
+    try{localStorage.setItem('zvert-lang',l)}catch(e){}
+    document.dispatchEvent(new Event('zvert:lang'));
+  }
+  for(var i=0;i<btns.length;i++) btns[i].addEventListener('click',function(){
+    var l=this.getAttribute('data-l');
+    setLang(l===root.lang ? (l==='bn'?'en':'bn') : l);
+  });
+  var saved='en'; try{saved=localStorage.getItem('zvert-lang')||'en'}catch(e){}
+  setLang(saved==='bn'?'bn':'en');
+})();
+</script>
 <script src="js/main.js" defer></script>
 </body>
 </html>
