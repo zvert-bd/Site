@@ -1,3 +1,8 @@
+// ===== CONTACT FORM SETTINGS =====
+// Paste your free Web3Forms access key between the quotes (get it at web3forms.com with zvert.bd@gmail.com).
+// While it is empty, the form opens the visitor's Gmail with their message filled in instead.
+const WEB3FORMS_KEY='';
+// ==================================
 {
 const T=(en,bn)=>`<span class="en">${en}</span><span class="bn">${bn}</span>`;
 const ic=d=>`<svg class="ico" viewBox="0 0 48 48" fill="none" stroke="#1E3A8A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V6h10M32 6h10v10M42 32v10H32M16 42H6V32" stroke="#D4AF37"/>${d}</svg>`;
@@ -15,7 +20,7 @@ const always=[['Product-first visuals: the item, its packaging, ingredients, tex
 const li=a=>a.map(x=>`<li>${T(x[0],x[1])}</li>`).join('');
 document.getElementById('never').innerHTML=li(never);document.getElementById('always').innerHTML=li(always);
 
-const steps=[['Send your product','পণ্যের তথ্য পাঠান','Share your page link, product photos, price and what makes it special.','পেজের লিংক, পণ্যের ছবি, দাম আর পণ্যের বিশেষত্ব জানান।'],['We check it is halal','হালাল যাচাই','We confirm the product and claims fit our halal and honesty rules.','পণ্য ও দাবিগুলো আমাদের হালাল ও সততার নিয়মে মেলে কিনা দেখি।'],['Draft in 48 hours','৪৮ ঘণ্টায় ড্রাফট','Our team uses AI to design your ads, then a person reviews every one.','আমাদের টিম AI দিয়ে বিজ্ঞাপন ডিজাইন করে, তারপর একজন মানুষ প্রতিটি যাচাই করেন।'],['Review and post','দেখুন ও পোস্ট করুন','Ask for changes until you are happy, then post or boost with confidence.','সন্তুষ্ট না হওয়া পর্যন্ত পরিবর্তন চান, তারপর নিশ্চিন্তে পোস্ট বা বুস্ট করুন।']];
+const steps=[['Send your product','পণ্যের তথ্য পাঠান','Share your page link, product photos, price and what makes it special.','পেজের লিংক, পণ্যের ছবি, দাম আর পণ্যের বিশেষত্ব জানান।'],['We check it is halal','হালাল যাচাই','We confirm the product and claims fit our halal and honesty rules.','পণ্য ও দাবিগুলো আমাদের হালাল ও সততার নিয়মে মেলে কিনা দেখি।'],['Draft in 48 hours','৪৮ ঘণ্টায় ড্রাফট','Our team uses AI to design your ads, then a person reviews every one.','আমাদের টিম AI দিয়ে বিজ্ঞাপন ডিজাইন করে, তারপর একজন মানুষ প্রতিটি যাচাই করেন।'],['Review and post','দেখুন ও পোস্ট করুন','Ask for revisions within your package (1 revision for every ৳1,000), then post or boost with confidence.','প্যাকেজের মধ্যে রিভিশন চান (প্রতি ৳১,০০০-এ ১টি রিভিশন), তারপর নিশ্চিন্তে পোস্ট বা বুস্ট করুন।']];
 document.getElementById('steps').innerHTML=steps.map(s=>`<li><h3>${T(s[0],s[1])}</h3><p>${T(s[2],s[3])}</p></li>`).join('');
 
 const frame=c=>`<path d="M14 40V14h26M160 14h26v26M186 160v26h-26M40 186H14v-26" fill="none" stroke="${c}" stroke-width="5"/>`;
@@ -29,10 +34,14 @@ attar:`<rect width="200" height="200" fill="#e9e1d2"/><rect y="148" width="200" 
 const ads=[['honey','Honey, straight from the hive','চাকের খাঁটি মধু','Madhu Ghor · 500 g · ৳650','মধু ঘর · ৫০০ গ্রাম · ৳৬৫০'],['dates','Ajwa dates for Ramadan','রমজানের জন্য আজওয়া খেজুর','Khejur Bari · 1 kg · ৳1,450','খেজুর বাড়ি · ১ কেজি · ৳১,৪৫০'],['panjabi','Cotton panjabi for Eid','ঈদের সুতি পাঞ্জাবি','Sunnah Wear · sizes 38 to 46 · ৳1,890','সুন্নাহ ওয়্যার · সাইজ ৩৮ থেকে ৪৬ · ৳১,৮৯০'],['vase','Handmade ceramic vase','হাতে তৈরি সিরামিক ফুলদানি','Ghor Sajano · 30 cm · ৳950','ঘর সাজানো · ৩০ সেমি · ৳৯৫০'],['bangles','Gold-plated bangle set','গোল্ড প্লেটেড চুড়ি সেট','Alankar BD · set of 3 · ৳1,200','অলংকার বিডি · ৩টির সেট · ৳১,২০০'],['attar','Alcohol-free attar','অ্যালকোহলমুক্ত আতর','Noor Attar · 6 ml · ৳480','নূর আতর · ৬ মিলি · ৳৪৮০']];
 document.getElementById('reel').innerHTML=ads.map(a=>`<figure class="ad" style="margin:0"><div class="art"><svg viewBox="0 0 200 200" aria-hidden="true">${art[a[0]]}</svg></div><figcaption class="cap"><b>${T(a[1],a[2])}</b><span>${T(a[3],a[4])}</span></figcaption></figure>`).join('');
 
-const plans=[['Starter','স্টার্টার','৳3,000','৳৩,০০০',0,[['8 photo ads a month','মাসে ৮টি ছবির বিজ্ঞাপন'],['Bangla captions','বাংলা ক্যাপশন'],['2 rounds of changes','২ বার পরিবর্তন'],['Halal and claims check','হালাল ও দাবি যাচাই']]],['Growth','গ্রোথ','৳7,500','৳৭,৫০০',1,[['12 photo ads a month','মাসে ১২টি ছবির বিজ্ঞাপন'],['4 short video ads','৪টি ছোট ভিডিও বিজ্ঞাপন'],['Bangla and English copy','বাংলা ও ইংরেজি লেখা'],['Monthly boost guidance','মাসিক বুস্ট পরামর্শ']]],['Brand','ব্র্যান্ড','৳15,000','৳১৫,০০০',0,[['20 photo ads a month','মাসে ২০টি ছবির বিজ্ঞাপন'],['8 short video ads','৮টি ছোট ভিডিও বিজ্ঞাপন'],['Profile, cover and post templates','প্রোফাইল, কভার ও পোস্ট টেমপ্লেট'],['Seasonal campaign plan','মৌসুমি ক্যাম্পেইন পরিকল্পনা']]]];
+const plans=[['Starter','স্টার্টার','৳3,000','৳৩,০০০',0,[['8 photo ads a month','মাসে ৮টি ছবির বিজ্ঞাপন'],['Bangla captions','বাংলা ক্যাপশন'],['Halal and claims check','হালাল ও দাবি যাচাই']]],['Growth','গ্রোথ','৳7,500','৳৭,৫০০',1,[['12 photo ads a month','মাসে ১২টি ছবির বিজ্ঞাপন'],['4 short video ads','৪টি ছোট ভিডিও বিজ্ঞাপন'],['Bangla and English copy','বাংলা ও ইংরেজি লেখা'],['Monthly boost guidance','মাসিক বুস্ট পরামর্শ']]],['Brand','ব্র্যান্ড','৳15,000','৳১৫,০০০',0,[['20 photo ads a month','মাসে ২০টি ছবির বিজ্ঞাপন'],['8 short video ads','৮টি ছোট ভিডিও বিজ্ঞাপন'],['Profile, cover and post templates','প্রোফাইল, কভার ও পোস্ট টেমপ্লেট'],['Seasonal campaign plan','মৌসুমি ক্যাম্পেইন পরিকল্পনা']]]];
+// REVISION RULE: 1 revision for every ৳1,000 of the package price (rounded down). Change a price above and the revisions update by themselves.
+const bnDigits=n=>String(n).replace(/\d/g,d=>'০১২৩৪৫৬৭৮৯'[d]);
+const revisions=p=>Math.floor(parseInt(p[2].replace(/\D/g,''),10)/1000);
+plans.forEach(p=>{const r=revisions(p);p[5].splice(1,0,[r+(r===1?' revision':' revisions')+' a month (1 per ৳1,000)','মাসে '+bnDigits(r)+'টি রিভিশন (প্রতি ৳১,০০০-এ ১টি)'])});
 document.getElementById('plans').innerHTML=plans.map(p=>`<div class="plan${p[4]?' pick':''}">${p[4]?`<span class="tag">${T('Most popular','সবচেয়ে জনপ্রিয়')}</span>`:''}<h3>${T(p[0],p[1])}</h3><div class="price">${T(p[2],p[3])}</div><div class="per">${T('per month','প্রতি মাসে')}</div><ul>${li(p[5])}</ul><a class="btn ${p[4]?'gold':'royal'}" href="#contact" data-plan="${p[0]}">${T('Choose '+p[0],p[1]+' বেছে নিন')}</a></div>`).join('');
 
-const faqs=[['Do you use AI-generated people or animals?','আপনারা কি AI দিয়ে মানুষ বা প্রাণী বানান?','No. We never generate human or animal faces or figures, including cartoons and silhouettes. Our ads show the product, its ingredients, textures and how it is made.','না। আমরা কখনো মানুষ বা প্রাণীর মুখ বা অবয়ব বানাই না, কার্টুন বা ছায়ামূর্তিও না। আমাদের বিজ্ঞাপনে থাকে পণ্য, এর উপাদান, টেক্সচার ও তৈরির প্রক্রিয়া।'],['How do videos work without music?','মিউজিক ছাড়া ভিডিও কীভাবে হয়?','We use silence, natural product sounds like pouring honey or rustling fabric, or a respectful male voice-over. Clear on-screen text in Bangla carries the message.','আমরা নীরবতা, পণ্যের প্রাকৃতিক শব্দ (মধু ঢালা, কাপড়ের শব্দ) বা ভদ্র পুরুষ কণ্ঠ ব্যবহার করি। স্ক্রিনে বাংলা লেখা বার্তাটি পৌঁছে দেয়।'],['How do you show clothing?','পোশাক কীভাবে দেখান?','Flat-lay, on hangers or on faceless displays only, with close-ups of fabric, stitching and detail.','শুধু ভাঁজ করে, হ্যাঙ্গারে বা মুখহীন ডিসপ্লেতে, সাথে কাপড়, সেলাই ও কারুকাজের ক্লোজআপ।'],['Do I need professional photos?','পেশাদার ছবি লাগবে কি?','No. Clear phone photos in daylight are enough to start. We will tell you if we need another angle.','না। দিনের আলোয় তোলা পরিষ্কার মোবাইল ছবিই যথেষ্ট। অন্য কোনো অ্যাঙ্গেল লাগলে আমরা জানাব।'],['Will you work with any product?','যেকোনো পণ্যের কাজ করেন?','Only products that are halal, legal in Bangladesh and genuinely what they claim to be. We politely decline anything else, including exaggerated health claims.','শুধু হালাল, বাংলাদেশে বৈধ এবং যা দাবি করা হয় আসলেই তাই, এমন পণ্য। বাকিগুলো, অতিরঞ্জিত স্বাস্থ্য দাবিসহ, আমরা বিনয়ের সাথে ফিরিয়ে দিই।']];
+const faqs=[['How many revisions do I get?','কয়টি রিভিশন পাব?','One revision for every ৳1,000 of your package: Starter (৳3,000) gets 3, Growth (৳7,500) gets 7 and Brand (৳15,000) gets 15 each month. A revision is one round of changes to one ad. Extra revisions can be added on request.','আপনার প্যাকেজের প্রতি ৳১,০০০-এ ১টি রিভিশন: স্টার্টার (৳৩,০০০) মাসে ৩টি, গ্রোথ (৳৭,৫০০) মাসে ৭টি এবং ব্র্যান্ড (৳১৫,০০০) মাসে ১৫টি। একটি রিভিশন মানে একটি বিজ্ঞাপনে এক দফা পরিবর্তন। অনুরোধে অতিরিক্ত রিভিশন যোগ করা যায়।'],['Do you use AI-generated people or animals?','আপনারা কি AI দিয়ে মানুষ বা প্রাণী বানান?','No. We never generate human or animal faces or figures, including cartoons and silhouettes. Our ads show the product, its ingredients, textures and how it is made.','না। আমরা কখনো মানুষ বা প্রাণীর মুখ বা অবয়ব বানাই না, কার্টুন বা ছায়ামূর্তিও না। আমাদের বিজ্ঞাপনে থাকে পণ্য, এর উপাদান, টেক্সচার ও তৈরির প্রক্রিয়া।'],['How do videos work without music?','মিউজিক ছাড়া ভিডিও কীভাবে হয়?','We use silence, natural product sounds like pouring honey or rustling fabric, or a respectful male voice-over. Clear on-screen text in Bangla carries the message.','আমরা নীরবতা, পণ্যের প্রাকৃতিক শব্দ (মধু ঢালা, কাপড়ের শব্দ) বা ভদ্র পুরুষ কণ্ঠ ব্যবহার করি। স্ক্রিনে বাংলা লেখা বার্তাটি পৌঁছে দেয়।'],['How do you show clothing?','পোশাক কীভাবে দেখান?','Flat-lay, on hangers or on faceless displays only, with close-ups of fabric, stitching and detail.','শুধু ভাঁজ করে, হ্যাঙ্গারে বা মুখহীন ডিসপ্লেতে, সাথে কাপড়, সেলাই ও কারুকাজের ক্লোজআপ।'],['Do I need professional photos?','পেশাদার ছবি লাগবে কি?','No. Clear phone photos in daylight are enough to start. We will tell you if we need another angle.','না। দিনের আলোয় তোলা পরিষ্কার মোবাইল ছবিই যথেষ্ট। অন্য কোনো অ্যাঙ্গেল লাগলে আমরা জানাব।'],['Will you work with any product?','যেকোনো পণ্যের কাজ করেন?','Only products that are halal, legal in Bangladesh and genuinely what they claim to be. We politely decline anything else, including exaggerated health claims.','শুধু হালাল, বাংলাদেশে বৈধ এবং যা দাবি করা হয় আসলেই তাই, এমন পণ্য। বাকিগুলো, অতিরঞ্জিত স্বাস্থ্য দাবিসহ, আমরা বিনয়ের সাথে ফিরিয়ে দিই।']];
 document.getElementById('faqs').innerHTML=faqs.map(f=>`<details><summary>${T(f[0],f[1])}</summary><p>${T(f[2],f[3])}</p></details>`).join('');
 
 const cats=[['Islamic products','ইসলামিক পণ্য'],['Honey or dates','মধু বা খেজুর'],['Pitha or snacks','পিঠা বা স্ন্যাকস'],['Modest fashion','শালীন পোশাক'],['Home decor','ঘর সাজানো'],['Jewellery','গহনা'],['Something else','অন্য কিছু']];
@@ -45,16 +54,36 @@ const fill=()=>{const b=root.lang==='bn',ci=fCat.selectedIndex,pi=fPlan.selected
 document.addEventListener('zvert:lang',fill);fill();
 document.getElementById('plans').addEventListener('click',e=>{const a=e.target.closest('[data-plan]');if(a)fPlan.selectedIndex=plans.findIndex(p=>p[0]===a.dataset.plan);});
 
-const form=document.getElementById('brief'),out=document.getElementById('out'),msg=document.getElementById('msg'),acts=document.getElementById('acts');
+const form=document.getElementById('brief'),out=document.getElementById('out'),msg=document.getElementById('msg'),acts=document.getElementById('acts'),send=document.getElementById('send');
+const EMAIL='zvert.bd@gmail.com';
+const gmailLink=(su,body)=>'https://mail.google.com/mail/?view=cm&fs=1&to='+EMAIL+'&su='+encodeURIComponent(su)+'&body='+encodeURIComponent(body);
+const say=(cls,en,bn)=>{msg.className='msg '+cls;msg.textContent=root.lang==='bn'?bn:en};
 let text='';
-form.addEventListener('submit',e=>{e.preventDefault();const b=root.lang==='bn',shop=form.shop.value.trim();
- if(!shop){msg.textContent=b?'দোকান বা পেজের নাম লিখুন।':'Please add your shop or page name.';form.shop.focus();return}
- if(!form.ok.checked){msg.textContent=b?'অনুগ্রহ করে নিশ্চিত করুন পণ্যটি হালাল।':'Please confirm your product is halal.';return}
- msg.textContent='';const note=form.note.value.trim();
- text=b?`আসসালামু আলাইকুম Zvert,\n\nদোকান: ${shop}\nপণ্য: ${fCat.value}\nপ্যাকেজ: ${fPlan.value}${note?`\n\n${note}`:''}\n\nআমার পণ্য হালাল এবং দাবিগুলো সত্য। পণ্যের ছবি সংযুক্ত করছি।`:`Assalamu alaikum Zvert,\n\nShop: ${shop}\nProducts: ${fCat.value}\nPackage: ${fPlan.value}${note?`\n\n${note}`:''}\n\nMy product is halal and my claims are true. Product photos attached.`;
+form.addEventListener('submit',async e=>{e.preventDefault();
+ const v=n=>form[n].value.trim(),name=v('name'),shop=v('shop');
+ if(!name){say('err','Please add your name.','আপনার নাম লিখুন।');form.name.focus();return}
+ if(!shop){say('err','Please add your shop or page name.','দোকান বা পেজের নাম লিখুন।');form.shop.focus();return}
+ if(!form.ok.checked){say('err','Please confirm your product is halal.','অনুগ্রহ করে নিশ্চিত করুন পণ্যটি হালাল।');return}
+ const subject='Ad enquiry: '+shop;
+ text=`Assalamu alaikum Zvert,\n\nName: ${name}\nPhone/WhatsApp: ${v('phone')||'-'}\nEmail: ${v('email')||'-'}\nShop: ${shop}\nProducts: ${fCat.value}\nPackage: ${fPlan.value}\n\n${v('note')}\n\nMy product is halal and my claims are true.`;
+ if(WEB3FORMS_KEY){
+  send.disabled=true;say('','Sending…','পাঠানো হচ্ছে…');
+  try{
+   const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},
+    body:JSON.stringify({access_key:WEB3FORMS_KEY,subject,from_name:'Zvert website',name,phone:v('phone'),email:v('email')||undefined,replyto:v('email')||undefined,shop,products:fCat.value,package:fPlan.value,message:v('note'),botcheck:form.botcheck.checked})});
+   const d=await r.json().catch(()=>({}));
+   if(r.ok&&d.success!==false){form.reset();fill();out.classList.remove('on');acts.hidden=true;say('ok','Thank you! Your message has reached us. We will reply soon, in sha Allah.','ধন্যবাদ! আপনার বার্তা আমাদের কাছে পৌঁছেছে। ইন শা আল্লাহ শীঘ্রই উত্তর দেব।');send.disabled=false;return}
+   throw new Error(d.message||r.status);
+  }catch(err){send.disabled=false;say('err','Sorry, the message could not be sent. Please use one of the buttons below instead.','দুঃখিত, বার্তাটি পাঠানো যায়নি। নিচের যেকোনো বোতাম ব্যবহার করুন।')}
+ }else{say('','Your message is ready. Tap "Open in Gmail" to send it.','আপনার বার্তা তৈরি। পাঠাতে "জিমেইলে খুলুন" চাপুন।')}
  out.textContent=text;out.classList.add('on');acts.hidden=false;
- document.getElementById('mail').href='mailto:zvert.bd@gmail.com?subject='+encodeURIComponent('Ad brief: '+shop)+'&body='+encodeURIComponent(text);});
-document.getElementById('copy').addEventListener('click',async()=>{const b=root.lang==='bn';try{await navigator.clipboard.writeText(text);msg.textContent=b?'কপি হয়েছে। ইমেইল বা ফেসবুক মেসেজে পেস্ট করুন: zvert.bd@gmail.com':'Copied. Paste it into an email to zvert.bd@gmail.com or a Facebook message.'}catch(err){msg.textContent=b?'কপি করা যায়নি, লেখাটি সিলেক্ট করে কপি করুন।':'Could not copy. Select the text above and copy it.'}});
+ document.getElementById('gmail').href=gmailLink(subject,text);
+ document.getElementById('mail').href='mailto:'+EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(text);
+ if(!WEB3FORMS_KEY){try{window.open(gmailLink(subject,text),'_blank','noopener')}catch(err){}}
+});
+const copy=async(t,en,bn)=>{try{await navigator.clipboard.writeText(t);say('ok',en,bn)}catch(err){say('err','Could not copy. Our email is '+EMAIL,'কপি করা যায়নি। আমাদের ইমেইল: '+EMAIL)}};
+document.getElementById('copy').addEventListener('click',()=>copy(text,'Copied. Paste it into an email to '+EMAIL+' or a Facebook message.','কপি হয়েছে। '+EMAIL+' ঠিকানায় ইমেইলে বা ফেসবুক মেসেজে পেস্ট করুন।'));
+document.getElementById('copy-addr').addEventListener('click',e=>{const b=e.currentTarget,old=b.innerHTML;navigator.clipboard.writeText(EMAIL).then(()=>{b.innerHTML=T('Copied ✓','কপি হয়েছে ✓');setTimeout(()=>b.innerHTML=old,2000)},()=>{b.innerHTML=EMAIL})});
 const hd=document.querySelector('header');
 const onScroll=()=>hd.classList.toggle('scrolled',scrollY>20);addEventListener('scroll',onScroll,{passive:true});onScroll();
 if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
